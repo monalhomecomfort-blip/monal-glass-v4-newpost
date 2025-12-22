@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Кошик — Mōnal</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+<!-- МЕНЮ -->
+<nav>
+    <div class="nav-left">
+        <img src="images/logo.svg" alt="Mōnal" class="nav-logo">
+
+        <div class="nav-social">
+            <a href="https://www.tiktok.com/@monalofficial?is_from_webapp=1&sender_device=pc" target="_blank">
+                <img src="images/social/tiktok.png" alt="TikTok">
+            </a>
+            <a href="https://www.instagram.com/monal.official/" target="_blank">
+                <img src="images/social/instagram.png" alt="Instagram">
+            </a>
+            <a href="https://www.facebook.com/people/Monal/61552030280894/" target="_blank">
+                <img src="images/social/facebook.png" alt="Facebook">
+            </a>
+        </div>
+    </div>
+
+    <div class="nav-center">
+        <a href="index.html">Головна</a>        
+        <a href="about.html">Про бренд</a>
+        <a href="contacts.html">Контакти</a>
+    </div>
+
+    <div class="nav-right">
+        <a href="delivery.html">Доставка</a>
+        <a href="cart.html">Кошик <span id="cart-count"></span></a>        
+    </div>
+</nav>
+
+<!-- ОБГОРТКА ДЛЯ КОНТЕНТУ + ФУТЕРА -->
+<div class="page-wrap">
+
+    <div class="container">
+
+
+        <h1 class="page-title">Кошик</h1>
+
+        <div class="delivery-columns">
+
+            <!-- Ліва колонка — список товарів -->
+            <div class="delivery-block cart-box">
+            
+                <h2>Ваші товари</h2>
+                <div id="cart-list" style="margin-bottom:14px;"></div>
+
+                <h2>Сума</h2>
+                <div id="cart-total" style="font-size:20px; margin-bottom:18px;"></div>
+
+                <button class="buy-btn" onclick="clearCart()" style="margin-right:10px;">
+                    Очистити
+                </button>
+
+                <button class="buy-btn" onclick="showCheckout()">
+                    Оформити
+                </button>
+
+            </div>
+
+            <!-- Права колонка — форма оформлення -->                     
+            
+            <div class="delivery-block" id="checkout" style="display:none;">
+
+<h2>Оформлення</h2>
+
+<input id="inp-last" placeholder="Прізвище" class="input" required>
+<input id="inp-first" placeholder="Ім'я" class="input" required>
+
+<input id="inp-phone" placeholder="Телефон (38(0XX)XXX-XX-XX)" 
+       class="input" oninput="maskPhone(this)" required>
+
+<input id="inp-city" placeholder="Місто" class="input" required>
+<input id="inp-np" placeholder="Відділення Нової Пошти" class="input" required>
+
+<div style="margin-top:12px;">
+    <label style="display:block; margin-bottom:4px;">
+        <input type="radio" name="pay" value="Картка онлайн">
+        Картка онлайн
+    </label>
+
+    <label style="display:block;">
+        <input type="radio" name="pay" value="Передплата 150 грн">
+        Передплата
+    </label>
+</div>
+
+<button class="buy-btn" style="margin-top:14px;" onclick="submitOrder()">
+    Надіслати замовлення
+</button>
+
+
+            </div>
+
+        </div>
+       
+    </div>
+
+    <!-- FOOTER -->
+    <footer>
+        <div class="footer-logo">
+            <img src="images/logo.svg" alt="Mōnal">
+        </div>
+
+        © 2025 Ароматика для дому
+    </footer>
+
+</div>
+
+<script src="cart.js"></script>    
+</body>
+</html>
