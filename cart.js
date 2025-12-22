@@ -165,7 +165,14 @@ async function loadCities() {
         })
     });
 
-    const data = await res.json();
+    
+    let data = {};
+    try {
+        data = await res.json();
+    } catch(e) {
+        console.log("JSON error", e);
+        data = { data: [] };
+    }
     const cities = (data && data.data) ? data.data : [];   
     
 
