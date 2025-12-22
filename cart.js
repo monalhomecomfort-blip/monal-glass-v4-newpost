@@ -154,27 +154,32 @@ ${itemsText}
 
 // завантаження міст Нової Пошти
 async function loadCities() {
-    const res = await fetch(NP_API_URL, {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({
-            apiKey: NP_API_KEY,
-            modelName: "Address",
-            calledMethod: "getCities",
-            methodProperties: { "Page": "1", "Limit": "3000" }
-        })
-    });
+    let res;
+    try {
+        res = await fetch(NP_API_URL, {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({
+                apiKey: NP_API_KEY,
+                modelName: "Address",
+                calledMethod: "getCities",
+                methodProperties: { "Page": "1", "Limit": "3000" }
+            })
+        });
+    } catch (e) {
+        console.log("Fetch error:", e);
+        return;
+    }
 
-    
     let data = {};
     try {
         data = await res.json();
-    } catch(e) {
-        console.log("JSON error", e);
-        data = { data: [] };
+    } catch (e) {
+        console.log("JSON parse error:", e);
+        return;
     }
-    const cities = (data && data.data) ? data.data : [];   
-    
+
+    const cities = (data && data.data) ? data.data : [];
 
     const citySelect = document.getElementById("np-city");
     citySelect.innerHTML = `<option value="">Оберіть місто</option>`;
@@ -188,6 +193,10 @@ async function loadCities() {
         loadWarehouses(ref);
     });
 }
+
+
+
+
 
 // завантаження відділень по місту
 async function loadWarehouses(cityRef) {
