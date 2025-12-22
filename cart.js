@@ -2,7 +2,7 @@ const BOT_TOKEN = "8077484017:AAHesSbIXkI-G-ZoHpgPQgRma03P31tqkWU";
 const CHAT_ID = "883840916";
 
 // ========= NOVA POSHTA API =========
-const NP_API_KEY = "ВАШ_API_КЛЮЧ";
+const NP_API_KEY = "8a63287eea2e60365b3b68e89340accc";
 const NP_API_URL = "https://api.novaposhta.ua/v2.0/json/";
 
 
