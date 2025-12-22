@@ -1,6 +1,10 @@
 const BOT_TOKEN = "8077484017:AAHesSbIXkI-G-ZoHpgPQgRma03P31tqkWU";
 const CHAT_ID = "883840916";
 
+// ========= NOVA POSHTA API =========
+const NP_API_KEY = "ВАШ_API_КЛЮЧ";
+const NP_API_URL = "https://api.novaposhta.ua/v2.0/json/";
+
 
 function updateCartCount() {
     const cart = JSON.parse(localStorage.getItem("cart")) || [];
@@ -90,14 +94,22 @@ function submitOrder() {
     const last  = document.getElementById("inp-last").value.trim();
     const first = document.getElementById("inp-first").value.trim();
     const phone = document.getElementById("inp-phone").value.trim();
-    const city  = document.getElementById("inp-city").value.trim();
-    const np    = document.getElementById("inp-np").value.trim();
+    const citySelect = document.getElementById("np-city");
+    const wrhSelect = document.getElementById("np-warehouse");
+
+    const city = citySelect.options[citySelect.selectedIndex].text;
+    const np = wrhSelect.options[wrhSelect.selectedIndex].text;
+       
     const pay   = document.querySelector("input[name='pay']:checked");
 
-    if (!last || !first || !phone || !city || !np || !pay) {
-        return alert("Заповніть всі поля");
+    if (!last || !first || !phone || !pay) {
+    return alert("Заповніть всі поля");
     }
 
+    if (!city || !np) {
+    return alert("Оберіть місто та відділення");
+    }  
+   
     const phonePattern = /^38\(0\d{2}\)\s?\d{3}-\d{2}-\d{2}$/;
     if (!phonePattern.test(phone)) {
         return alert("Телефон у форматі 38(0XX)XXX-XX-XX");
@@ -143,6 +155,64 @@ ${itemsText}
 
 document.addEventListener("DOMContentLoaded", updateCartCount);
 document.addEventListener("DOMContentLoaded", renderCart);
+
+document.addEventListener("DOMContentLoaded", loadCities);
+
+async function loadCities() {
+    const res = await fetch(NP_API_URL, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+            apiKey: NP_API_KEY,
+            modelName: "Address",
+            calledMethod: "getCities",
+            methodProperties: { "Page": "1", "Limit": "3000" }
+        })
+    });
+
+    const data = await res.json();
+    const cities = data?.data || [];
+
+    const citySelect = document.getElementById("np-city");
+    citySelect.innerHTML = `<option value="">Оберіть місто</option>`;
+
+    cities.forEach(c => {
+        citySelect.innerHTML += `<option value="${c.Ref}">${c.Description}</option>`;
+    });
+
+    citySelect.addEventListener("change", () => {
+        const ref = citySelect.value;
+        loadWarehouses(ref);
+    });
+}
+
+async function loadWarehouses(cityRef) {
+    const wrhSelect = document.getElementById("np-warehouse");
+    wrhSelect.disabled = true;
+    wrhSelect.innerHTML = `<option value="">Завантаження...</option>`;
+
+    const res = await fetch(NP_API_URL, {
+        method: "POST",
+        headers: {"Content-Type": "application/json"},
+        body: JSON.stringify({
+            apiKey: NP_API_KEY,
+            modelName: "Address",
+            calledMethod: "getWarehouses",
+            methodProperties: { "CityRef": cityRef }
+        })
+    });
+
+    const data = await res.json();
+    const list = data?.data || [];
+
+    wrhSelect.innerHTML = `<option value="">Оберіть відділення</option>`;
+    list.forEach(w => {
+        wrhSelect.innerHTML += `<option value="${w.Description}">${w.Description}</option>`;
+    });
+
+    wrhSelect.disabled = false;
+}
+
 
 const phoneInput = document.getElementById("inp-phone");
 
