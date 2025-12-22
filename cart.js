@@ -232,7 +232,7 @@ function formatPhone(e) {
 document.addEventListener("DOMContentLoaded", () => {
     updateCartCount();   // оновити лічильник кошика
     renderCart();        // показати товари
-    loadCities();        // підтягнути міста НП
+    //loadCities();        // підтягнути міста НП
 
     const phoneInput = document.getElementById("inp-phone");
     if (phoneInput) {
