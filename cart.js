@@ -152,12 +152,7 @@ ${itemsText}
     });
 }
 
-
-document.addEventListener("DOMContentLoaded", updateCartCount);
-document.addEventListener("DOMContentLoaded", renderCart);
-
-document.addEventListener("DOMContentLoaded", loadCities);
-
+// завантаження міст Нової Пошти
 async function loadCities() {
     const res = await fetch(NP_API_URL, {
         method: "POST",
@@ -186,6 +181,7 @@ async function loadCities() {
     });
 }
 
+// завантаження відділень по місту
 async function loadWarehouses(cityRef) {
     const wrhSelect = document.getElementById("np-warehouse");
     wrhSelect.disabled = true;
@@ -213,11 +209,7 @@ async function loadWarehouses(cityRef) {
     wrhSelect.disabled = false;
 }
 
-
-const phoneInput = document.getElementById("inp-phone");
-
-phoneInput.addEventListener("input", formatPhone);
-
+// маска телефону
 function formatPhone(e) {
     let v = e.target.value.replace(/\D/g, ""); // тільки цифри
 
@@ -235,3 +227,15 @@ function formatPhone(e) {
 
     e.target.value = formatted;
 }
+
+// усе запускаємо, коли сторінка вже завантажена
+document.addEventListener("DOMContentLoaded", () => {
+    updateCartCount();   // оновити лічильник кошика
+    renderCart();        // показати товари
+    loadCities();        // підтягнути міста НП
+
+    const phoneInput = document.getElementById("inp-phone");
+    if (phoneInput) {
+        phoneInput.addEventListener("input", formatPhone);
+    }
+});
