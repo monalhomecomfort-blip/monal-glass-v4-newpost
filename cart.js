@@ -154,45 +154,30 @@ ${itemsText}
 
 // завантаження міст Нової Пошти
 async function loadCities() {
-    let res;
-    try {
-        res = await fetch(NP_API_URL, {
-            method: "POST",
-            headers: { "Content-Type": "application/json" },
-            body: JSON.stringify({
-                apiKey: NP_API_KEY,
-                modelName: "Address",
-                calledMethod: "getCities",
-                methodProperties: { "Page": "1", "Limit": "3000" }
-            })
-        });
-    } catch (e) {
-        console.log("Fetch error:", e);
-        return;
-    }
+    console.log("loadCities started");
 
-    let data = {};
-    try {
-        data = await res.json();
-    } catch (e) {
-        console.log("JSON parse error:", e);
-        return;
-    }
-
-    const cities = (data && data.data) ? data.data : [];
-
-    const citySelect = document.getElementById("np-city");
-    citySelect.innerHTML = `<option value="">Оберіть місто</option>`;
-
-    cities.forEach(c => {
-        citySelect.innerHTML += `<option value="${c.Ref}">${c.Description}</option>`;
-    });
-
-    citySelect.addEventListener("change", () => {
-        const ref = citySelect.value;
-        loadWarehouses(ref);
+    fetch(NP_API_URL, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+            apiKey: NP_API_KEY,
+            modelName: "Address",
+            calledMethod: "getCities",
+            methodProperties: { "Page": "1", "Limit": "10" }
+        })
+    })
+    .then(r => {
+        console.log("fetch completed with status:", r.status);
+        return r.text();
+    })
+    .then(t => {
+        console.log("raw answer:", t.substring(0, 200));
+    })
+    .catch(err => {
+        console.log("fetch error:", err);
     });
 }
+
 
 
 
