@@ -211,33 +211,36 @@ function toggleManualNP() {
 
 
 /* ===================== ОФОРМЛЕННЯ ЗАМОВЛЕННЯ ===================== */
-
 function submitOrder() {
     const cart = JSON.parse(localStorage.getItem("cart")) || [];
-    if (cart.length === 0) {
+    if (!cart.length) {
         alert("Кошик порожній");
         return;
     }
 
-    const last  = document.getElementById("inp-last").value.trim();
-    const first = document.getElementById("inp-first").value.trim();
-    const phone = document.getElementById("inp-phone").value.trim();
-    const city  = document.getElementById("np-city-input").value.trim();
-    const np    = document.getElementById("np-warehouse").value;
-    const pay   = document.querySelector("input[name='pay']:checked");
+    const last  = document.getElementById("inp-last")?.value.trim() || "";
+    const first = document.getElementById("inp-first")?.value.trim() || "";
+    const phone = document.getElementById("inp-phone")?.value.trim() || "";
+    const city  = document.getElementById("np-city-input")?.value.trim() || "";
 
-    if (!last || !first || !phone || !pay) {
+    const npSelectEl = document.getElementById("np-warehouse");
+    const npManualEl = document.getElementById("np-manual");
+
+    const npSelect = npSelectEl ? npSelectEl.value : "";
+    const npManual = npManualEl ? npManualEl.value.trim() : "";
+
+    const np = npManual
+        ? `✍️ ВРУЧНУ: ${npManual}`
+        : npSelect;
+
+    const pay = document.querySelector("input[name='pay']:checked");
+
+    if (!last || !first || !phone || !city || !np || !pay) {
         alert("Заповніть всі поля");
         return;
     }
 
-    if (!city || !np) {
-        alert("Оберіть місто та відділення");
-        return;
-    }
-
-    const phonePattern = /^38\(0\d{2}\)\s?\d{3}-\d{2}-\d{2}$/;
-    if (!phonePattern.test(phone)) {
+    if (!/^38\(0\d{2}\)\s?\d{3}-\d{2}-\d{2}$/.test(phone)) {
         alert("Телефон у форматі 38(0XX)XXX-XX-XX");
         return;
     }
@@ -273,11 +276,13 @@ ${itemsText}
 💰 Загальна сума: ${total} грн
 `;
 
+    // ⛔ НЕ відправляємо одразу
     PAYMENT_CONTEXT = {
         orderId,
         text
     };
 
+    // ✅ ВІДКРИВАЄМО МОДАЛКУ
     openPaymentModal(orderId, payNow);
 }
 
