@@ -84,15 +84,16 @@
                     required
                 >
 
-                <!-- ❗ ВАЖЛИВО: БЕЗ oninput -->
+                <!-- Телефон (БЕЗ oninput, маска тільки через JS) -->
                 <input
                     id="inp-phone"
                     class="input"
                     placeholder="Телефон (38(0XX)XXX-XX-XX)"
                     required
-                >                
+                >
 
-                <!-- Місто -->
+                <!-- Місто (autocomplete) -->
+                <div style="position: relative;">
                 <input
                     id="np-city-input"
                     class="input"
@@ -102,30 +103,36 @@
                 >
 
                 <div id="np-city-list" class="autocomplete-list"></div>
+    </div>
 
-                <!-- Відділення -->
-                <select id="np-warehouse" class="input" required disabled>
-                    <option value="">Оберіть відділення / поштомат</option>
-                </select>
+    <!-- Відділення / поштомат -->
+    <select id="np-warehouse" class="input" required disabled>
+        <option value="">Оберіть відділення / поштомат</option>
+    </select>
 
+    <!-- Оплата -->
+    <div style="margin-top:12px;">
+        <label style="display:block; margin-bottom:4px;">
+            <input type="radio" name="pay" value="Картка онлайн">
+            Картка онлайн
+        </label>
 
-                <div style="margin-top:12px;">
-                    <label style="display:block; margin-bottom:4px;">
-                        <input type="radio" name="pay" value="Картка онлайн">
-                        Картка онлайн
-                    </label>
+        <label style="display:block;">
+            <input type="radio" name="pay" value="Передплата 150 грн">
+            Передплата
+        </label>
+    </div>
 
-                    <label style="display:block;">
-                        <input type="radio" name="pay" value="Передплата 150 грн">
-                        Передплата
-                    </label>
-                </div>
+    <button
+        class="buy-btn"
+        style="margin-top:14px;"
+        onclick="submitOrder()"
+    >
+        Надіслати замовлення
+    </button>
 
-                <button class="buy-btn" style="margin-top:14px;" onclick="submitOrder()">
-                    Надіслати замовлення
-                </button>
+</div>
 
-            </div>
         </div>
     </div>
 
