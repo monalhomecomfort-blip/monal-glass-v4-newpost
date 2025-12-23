@@ -702,7 +702,7 @@ a.sub-mini {
 .autocomplete-item {
     padding: 8px 10px;
     font-size: 14px;
-    line-height: 1.2;   /* 👈 ОЦЕ */
+    line-height: 1.1;   /* 👈 ОЦЕ */
     color: #000;
     background: #f6f2ee;
     cursor: pointer;
