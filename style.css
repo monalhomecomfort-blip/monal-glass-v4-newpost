@@ -684,6 +684,7 @@ a.sub-mini {
     overflow-y: auto;
     width: 100%;
     z-index: 1000;
+    display: none; /* 👈 ВАЖЛИВО */
 }
 
 .autocomplete-item {
