@@ -122,15 +122,23 @@ function initCityAutocomplete() {
 
 
     input.addEventListener("input", () => {
-        const value = input.value.toLowerCase();
+        const value = input.value.toLowerCase().trim();
         list.innerHTML = "";
 
-        if (!value) return;
+        if (!value) {
+            list.style.display = "none";
+            return;
+        }
 
         const matches = cities
             .filter(c => c.toLowerCase().startsWith(value))
             .slice(0, 15);
-       
+
+        if (matches.length === 0) {
+            list.style.display = "none";
+            return;
+        }
+
         matches.forEach(city => {
             const div = document.createElement("div");
             div.className = "autocomplete-item";
@@ -139,18 +147,26 @@ function initCityAutocomplete() {
             div.addEventListener("click", () => {
                 input.value = city;
                 list.innerHTML = "";
+                list.style.display = "none"; // 👈 ХОВАЄМО
                 fillWarehouses(city);
-            });
-
-            list.appendChild(div);
         });
+
+        list.appendChild(div);
     });
+
+        list.style.display = "block"; // 👈 ПОКАЗУЄМО ТІЛЬКИ КОЛИ Є ЩО
+    });
+
+
 
     document.addEventListener("click", e => {
         if (!list.contains(e.target) && e.target !== input) {
             list.innerHTML = "";
+            list.style.display = "none";
         }
     });
+
+    
 }
 
 
