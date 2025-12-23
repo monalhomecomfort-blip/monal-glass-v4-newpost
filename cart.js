@@ -289,6 +289,39 @@ ${itemsText}
 }
 
 
+
+/* ===================== МОДАЛКА ОПЛАТИ ===================== */
+function openPaymentModal(orderId, payNow) {
+    const modal = document.getElementById("payment-modal");
+    const orderEl = document.getElementById("pay-order-id");
+    const amountEl = document.getElementById("pay-amount");
+
+    if (!modal || !orderEl || !amountEl) {
+        alert("Помилка: вікно оплати не знайдено");
+        return;
+    }
+
+    orderEl.textContent = orderId;
+    amountEl.textContent = payNow;
+
+    modal.style.display = "flex";
+}
+
+function closePaymentModal() {
+    const modal = document.getElementById("payment-modal");
+    if (modal) modal.style.display = "none";
+}
+
+function confirmPayment() {
+    if (!PAYMENT_CONTEXT) return;
+
+    sendOrderToTelegram(PAYMENT_CONTEXT);
+    PAYMENT_CONTEXT = null;
+
+    closePaymentModal();
+}
+
+
 /* ===================== ОПЛАТА ЗАМОВЛЕННЯ ===================== */
 function sendOrderToTelegram(ctx) {
     fetch(`https://api.telegram.org/bot${BOT_TOKEN}/sendMessage`, {
