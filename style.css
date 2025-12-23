@@ -678,13 +678,15 @@ a.sub-mini {
 
 .autocomplete-list {
     position: absolute;
+    top: 100%;
+    left: 0;
+    right: 0;
     background: #fff;
     border: 1px solid #ccc;
     max-height: 240px;
     overflow-y: auto;
-    width: 100%;
     z-index: 1000;
-    display: none; /* 👈 ВАЖЛИВО */
+    display: none;
 }
 
 .autocomplete-item {
