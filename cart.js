@@ -180,6 +180,35 @@ function fillWarehouses(city) {
     select.disabled = false;
 }
 
+function toggleManualNP() {
+    const manual = document.getElementById("np-manual");
+    const select = document.getElementById("np-warehouse");
+    const hint   = document.getElementById("np-manual-hint");
+
+    if (!manual || !select || !hint) return;
+
+    const manualVisible = manual.style.display === "block";
+
+    if (!manualVisible) {
+        // показуємо ручне поле
+        manual.style.display = "block";
+        hint.style.display = "block";
+        manual.focus();
+
+        select.style.display = "none";
+        select.value = "";
+        select.disabled = true;
+    } else {
+        // повертаємо select
+        manual.style.display = "none";
+        hint.style.display = "none";
+        manual.value = "";
+
+        select.style.display = "block";
+        select.disabled = false;
+    }
+}
+
 
 /* ===================== ОФОРМЛЕННЯ ЗАМОВЛЕННЯ ===================== */
 
@@ -191,8 +220,13 @@ function submitOrder() {
     const first = document.getElementById("inp-first").value.trim();
     const phone = document.getElementById("inp-phone").value.trim();
     const city  = document.getElementById("np-city-input").value.trim();
-    const np    = document.getElementById("np-warehouse").value;
+    const npSelect = document.getElementById("np-warehouse").value;
+    const npManual = document.getElementById("np-manual").value.trim();
 
+    const np = npManual
+        ? `✍️ ВРУЧНУ: ${npManual}`
+        : npSelect;
+   
     const pay = document.querySelector("input[name='pay']:checked");
 
     if (!last || !first || !phone || !city || !np || !pay) {
