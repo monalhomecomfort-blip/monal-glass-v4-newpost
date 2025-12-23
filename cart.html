@@ -171,5 +171,41 @@
 </div>
 
 <script src="cart.js"></script>
+<!-- МОДАЛЬНЕ ВІКНО ОПЛАТИ -->
+<div id="payment-modal" class="modal" style="display:none;">
+  <div class="modal-content">
+
+    <h3>Оплата замовлення</h3>
+
+    <p><strong>Номер замовлення:</strong> <span id="pay-order-id"></span></p>
+    <p><strong>Сума до оплати зараз:</strong> <span id="pay-amount"></span> грн</p>
+
+    <p style="margin-top:12px; font-size:14px;">
+      Онлайн-оплата буде доступна найближчим часом.<br>
+      Зараз ви можете оплатити переказом на карту.<br>
+      <strong>Вказуйте номер замовлення в коментарі оплати.</strong>
+    </p>
+
+    <hr>
+
+    <p><strong>Отримувач:</strong> Бойко Аліна Олександрівна</p>
+    <p><strong>Банк:</strong> Акціонерне товариство УНІВЕРСАЛ БАНК</p>
+
+    <div class="card-box">
+      <span id="card-number">4441 1110 6096 6045</span>
+      <button type="button" onclick="copyCard()">Скопіювати</button>
+    </div>
+
+    <button class="buy-btn" style="margin-top:14px;" onclick="confirmPayment()">
+      Я оплатив(ла)
+    </button>
+
+    <button class="close-btn" onclick="closePaymentModal()">
+      Закрити
+    </button>
+
+  </div>
+</div>
+
 </body>
 </html>
