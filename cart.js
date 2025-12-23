@@ -157,7 +157,16 @@ function fillWarehouses(city) {
 
     if (!NP_DATA || !NP_DATA[city]) return;
 
-    NP_DATA[city].forEach(w => {
+    const filtered = NP_DATA[city].filter(w =>
+        /відділення|поштомат/i.test(w) &&
+        !/вантаж|склад|термінал/i.test(w)
+    );
+
+    if (filtered.length === 0) {
+        return;
+    }
+
+    filtered.forEach(w => {
         const opt = document.createElement("option");
         opt.value = w;
         opt.textContent = w;
@@ -167,17 +176,20 @@ function fillWarehouses(city) {
     select.disabled = false;
 }
 
+
+
 /* ===================== ОФОРМЛЕННЯ ЗАМОВЛЕННЯ ===================== */
 
 function submitOrder() {
     const cart = JSON.parse(localStorage.getItem("cart")) || [];
     if (!cart.length) return alert("Кошик порожній");
 
-    const last = inp-last.value.trim();
-    const first = inp-first.value.trim();
-    const phone = inp-phone.value.trim();
-    const city = np-city-input.value.trim();
-    const np = np-warehouse.value;
+    const last  = document.getElementById("inp-last").value.trim();
+    const first = document.getElementById("inp-first").value.trim();
+    const phone = document.getElementById("inp-phone").value.trim();
+    const city  = document.getElementById("np-city-input").value.trim();
+    const np    = document.getElementById("np-warehouse").value;
+
     const pay = document.querySelector("input[name='pay']:checked");
 
     if (!last || !first || !phone || !city || !np || !pay) {
