@@ -86,17 +86,27 @@ function formatPhone(e) {
 let NP_DATA = {};
 
 function loadNPFromJSON() {
-    fetch("/monal-glass-v4-newpost/np.json")    
-        .then(res => res.json())
+    fetch("/monal-glass-v4-newpost/np.json")
+        .then(res => {
+            if (!res.ok) {
+                throw new Error("HTTP error " + res.status);
+            }
+            return res.json();
+        })
         .then(data => {
+            if (!data || Object.keys(data).length === 0) {
+                console.warn("NP.json порожній або невалідний");
+                return;
+            }
+
             NP_DATA = data;
-            fillCities();
+            initCityAutocomplete();
         })
         .catch(err => {
-            alert("Помилка завантаження довідника Нової Пошти");
-            console.error(err);
+            console.warn("Довідник НП ще завантажується або тимчасово недоступний", err);
         });
 }
+
 
 function initCityAutocomplete() {
     const input = document.getElementById("np-city-input");
