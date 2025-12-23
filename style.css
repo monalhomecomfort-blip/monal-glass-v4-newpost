@@ -700,11 +700,10 @@ a.sub-mini {
 }
 
 .autocomplete-item {
-    padding: 8px 12px;
-
-    font-family: inherit;
+    padding: 8px 10px;
     font-size: 14px;
-    color: #000;                   /* 👈 чорний */
+    line-height: 1.2;   /* 👈 ОЦЕ */
+    color: #000;
     background: #f6f2ee;
     cursor: pointer;
 }
