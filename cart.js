@@ -214,31 +214,48 @@ function toggleManualNP() {
 
 function submitOrder() {
     const cart = JSON.parse(localStorage.getItem("cart")) || [];
-    if (!cart.length) return alert("Кошик порожній");
+    if (cart.length === 0) {
+        alert("Кошик порожній");
+        return;
+    }
 
     const last  = document.getElementById("inp-last").value.trim();
     const first = document.getElementById("inp-first").value.trim();
     const phone = document.getElementById("inp-phone").value.trim();
     const city  = document.getElementById("np-city-input").value.trim();
-    const npSelect = document.getElementById("np-warehouse").value;
-    const npManual = document.getElementById("np-manual").value.trim();
+    const np    = document.getElementById("np-warehouse").value;
+    const pay   = document.querySelector("input[name='pay']:checked");
 
-    const np = npManual
-        ? `✍️ ВРУЧНУ: ${npManual}`
-        : npSelect;
-   
-    const pay = document.querySelector("input[name='pay']:checked");
-
-    if (!last || !first || !phone || !city || !np || !pay) {
-        return alert("Заповніть всі поля");
+    if (!last || !first || !phone || !pay) {
+        alert("Заповніть всі поля");
+        return;
     }
 
-    if (!/^38\(0\d{2}\)\s?\d{3}-\d{2}-\d{2}$/.test(phone)) {
-        return alert("Телефон у форматі 38(0XX)XXX-XX-XX");
+    if (!city || !np) {
+        alert("Оберіть місто та відділення");
+        return;
+    }
+
+    const phonePattern = /^38\(0\d{2}\)\s?\d{3}-\d{2}-\d{2}$/;
+    if (!phonePattern.test(phone)) {
+        alert("Телефон у форматі 38(0XX)XXX-XX-XX");
+        return;
     }
 
     const orderId = Date.now().toString().slice(-6);
     const total = cart.reduce((s, i) => s + i.price, 0);
+
+    let payNow = total;
+    let paymentLabel = "100% оплата";
+
+    if (pay.value === "Передплата 150 грн") {
+        payNow = 150;
+        paymentLabel = "Передплата 150 грн, решта при отриманні";
+    }
+
+    const itemsText = cart
+        .map(i => `• ${i.label ? `[${i.label}] ` : ""}${i.name} — ${i.price} грн`)
+        .join("\n");
 
     const text =
 `🧾 *Нове замовлення №${orderId}*
@@ -246,17 +263,40 @@ function submitOrder() {
 📞 ${phone}
 🏙 ${city}
 📦 НП: ${np}
-💳 Оплата: ${pay.value}
 
-💰 Сума: ${total} грн`;
+💳 Оплата: ${paymentLabel}
+💸 До оплати зараз: ${payNow} грн
 
+🛒 Товари:
+${itemsText}
+
+💰 Загальна сума: ${total} грн
+`;
+
+    PAYMENT_CONTEXT = {
+        orderId,
+        text
+    };
+
+    openPaymentModal(orderId, payNow);
+}
+
+
+/* ===================== ОПЛАТА ЗАМОВЛЕННЯ ===================== */
+function sendOrderToTelegram(ctx) {
     fetch(`https://api.telegram.org/bot${BOT_TOKEN}/sendMessage`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ chat_id: CHAT_ID, text, parse_mode: "Markdown" })
+        body: JSON.stringify({
+            chat_id: CHAT_ID,
+            text: ctx.text,
+            parse_mode: "Markdown"
+        })
     }).then(() => {
         clearCart();
-        checkout.innerHTML = `<h2>Замовлення №${orderId} оформлено</h2>`;
+        document.getElementById("checkout").innerHTML =
+            `<h2>Ваше замовлення №${ctx.orderId} оформлено.</h2>
+             <p>Очікуйте дзвінок оператора.</p>`;
     });
 }
 
