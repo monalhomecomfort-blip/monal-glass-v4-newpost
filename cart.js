@@ -5,10 +5,9 @@ const CHAT_ID = "883840916";
 
 function updateCartCount() {
     const cart = JSON.parse(localStorage.getItem("cart")) || [];
-    const count = cart.length;
     const el = document.getElementById("cart-count");
     if (el) {
-        el.textContent = count > 0 ? `(${count})` : "";
+        el.textContent = cart.length > 0 ? `(${cart.length})` : "";
     }
 }
 
@@ -40,12 +39,11 @@ function renderCart() {
         </div>
     `).join("");
 
-    const total = cart.reduce((sum, i) => sum + i.price, 0);
-    totalEl.textContent = total + " грн";
+    totalEl.textContent = cart.reduce((s, i) => s + i.price, 0) + " грн";
 }
 
 function removeFromCart(index) {
-    let cart = JSON.parse(localStorage.getItem("cart")) || [];
+    const cart = JSON.parse(localStorage.getItem("cart")) || [];
     cart.splice(index, 1);
     localStorage.setItem("cart", JSON.stringify(cart));
     renderCart();
@@ -67,18 +65,17 @@ function showCheckout() {
 
 function formatPhone(e) {
     let v = e.target.value.replace(/\D/g, "");
-
     if (!v.startsWith("38")) v = "38" + v;
     if (v.length > 12) v = v.slice(0, 12);
 
-    let formatted = "38";
-    if (v.length > 2) formatted += "(" + v.substring(2, 5);
-    if (v.length >= 5) formatted += ")";
-    if (v.length > 5) formatted += " " + v.substring(5, 8);
-    if (v.length > 8) formatted += "-" + v.substring(8, 10);
-    if (v.length > 10) formatted += "-" + v.substring(10, 12);
+    let r = "38";
+    if (v.length > 2) r += "(" + v.slice(2, 5);
+    if (v.length >= 5) r += ")";
+    if (v.length > 5) r += " " + v.slice(5, 8);
+    if (v.length > 8) r += "-" + v.slice(8, 10);
+    if (v.length > 10) r += "-" + v.slice(10, 12);
 
-    e.target.value = formatted;
+    e.target.value = r;
 }
 
 /* ===================== НОВА ПОШТА (np.json) ===================== */
@@ -88,29 +85,16 @@ let NP_DATA = null;
 function loadNPFromJSON() {
     fetch("/monal-glass-v4-newpost/np.json")
         .then(res => {
-            if (!res.ok) {
-                throw new Error("HTTP error " + res.status);
-            }
+            if (!res.ok) throw new Error(res.status);
             return res.json();
         })
         .then(data => {
-            if (!data || typeof data !== "object" || Object.keys(data).length === 0) {
-                console.warn("NP.json порожній або невалідний");
-                return;
-            }
-
+            if (!data || !Object.keys(data).length) return;
             NP_DATA = data;
-
-            // ініціалізуємо autocomplete тільки коли дані готові
-            if (typeof initCityAutocomplete === "function") {
-                initCityAutocomplete();
-            }
+            initCityAutocomplete();
         })
         .catch(err => {
-            console.warn(
-                "Не вдалося завантажити довідник Нової Пошти (np.json)",
-                err
-            );
+            console.warn("Не вдалося завантажити np.json", err);
         });
 }
 
@@ -120,10 +104,7 @@ function initCityAutocomplete() {
 
     if (!input || !list || !NP_DATA) return;
 
-    const cities = Object.keys(NP_DATA);
-
-    // Київ завжди перший
-    cities.sort((a, b) => {
+    const cities = Object.keys(NP_DATA).sort((a, b) => {
         if (a === "Київ") return -1;
         if (b === "Київ") return 1;
         return a.localeCompare(b, "uk");
@@ -138,11 +119,11 @@ function initCityAutocomplete() {
             return;
         }
 
-        const matches = cities
-            .filter(c => c.toLowerCase().startsWith(value))
-            .slice(0, 15);
+        const matches = cities.filter(c =>
+            c.toLowerCase().startsWith(value)
+        ).slice(0, 15);
 
-        if (matches.length === 0) {
+        if (!matches.length) {
             list.style.display = "none";
             return;
         }
@@ -151,55 +132,30 @@ function initCityAutocomplete() {
             const div = document.createElement("div");
             div.className = "autocomplete-item";
             div.textContent = city;
-
-            div.addEventListener("click", () => {
+            div.onclick = () => {
                 input.value = city;
-                list.innerHTML = "";
                 list.style.display = "none";
                 fillWarehouses(city);
-            });
-
+            };
             list.appendChild(div);
         });
 
         list.style.display = "block";
     });
 
-    document.addEventListener("click", (e) => {
+    document.addEventListener("click", e => {
         if (!list.contains(e.target) && e.target !== input) {
-            list.innerHTML = "";
             list.style.display = "none";
         }
     });
 }
 
-function fillCities() {
-    const citySelect = document.getElementById("np-city");
-    const wrhSelect = document.getElementById("np-warehouse");
-
-    citySelect.innerHTML = `<option value="">Оберіть місто</option>`;
-    wrhSelect.innerHTML = `<option value="">Оберіть відділення / поштомат</option>`;
-    wrhSelect.disabled = true;
-
-    Object.keys(NP_DATA).sort().forEach(city => {
-        const opt = document.createElement("option");
-        opt.value = city;
-        opt.textContent = city;
-        citySelect.appendChild(opt);
-    });
-
-    citySelect.addEventListener("change", () => {
-        fillWarehouses(citySelect.value);
-    });
-}
-
 function fillWarehouses(city) {
     const select = document.getElementById("np-warehouse");
-
     select.innerHTML = `<option value="">Оберіть відділення / поштомат</option>`;
     select.disabled = true;
 
-    if (!city || !NP_DATA[city]) return;
+    if (!NP_DATA || !NP_DATA[city]) return;
 
     NP_DATA[city].forEach(w => {
         const opt = document.createElement("option");
@@ -215,40 +171,25 @@ function fillWarehouses(city) {
 
 function submitOrder() {
     const cart = JSON.parse(localStorage.getItem("cart")) || [];
-    if (cart.length === 0) {
-        alert("Кошик порожній");
-        return;
+    if (!cart.length) return alert("Кошик порожній");
+
+    const last = inp-last.value.trim();
+    const first = inp-first.value.trim();
+    const phone = inp-phone.value.trim();
+    const city = np-city-input.value.trim();
+    const np = np-warehouse.value;
+    const pay = document.querySelector("input[name='pay']:checked");
+
+    if (!last || !first || !phone || !city || !np || !pay) {
+        return alert("Заповніть всі поля");
     }
 
-    const last  = document.getElementById("inp-last").value.trim();
-    const first = document.getElementById("inp-first").value.trim();
-    const phone = document.getElementById("inp-phone").value.trim();
-    const city  = document.getElementById("np-city-input").value.trim();
-    const np    = document.getElementById("np-warehouse").value;
-    const pay   = document.querySelector("input[name='pay']:checked");
-
-    if (!last || !first || !phone || !pay) {
-        alert("Заповніть всі поля");
-        return;
-    }
-
-    if (!city || !np) {
-        alert("Оберіть місто та відділення");
-        return;
-    }
-
-    const phonePattern = /^38\(0\d{2}\)\s?\d{3}-\d{2}-\d{2}$/;
-    if (!phonePattern.test(phone)) {
-        alert("Телефон у форматі 38(0XX)XXX-XX-XX");
-        return;
+    if (!/^38\(0\d{2}\)\s?\d{3}-\d{2}-\d{2}$/.test(phone)) {
+        return alert("Телефон у форматі 38(0XX)XXX-XX-XX");
     }
 
     const orderId = Date.now().toString().slice(-6);
     const total = cart.reduce((s, i) => s + i.price, 0);
-
-    const itemsText = cart
-        .map(i => `• ${i.label ? `[${i.label}] ` : ""}${i.name} — ${i.price} грн`)
-        .join("\n");
 
     const text =
 `🧾 *Нове замовлення №${orderId}*
@@ -258,26 +199,15 @@ function submitOrder() {
 📦 НП: ${np}
 💳 Оплата: ${pay.value}
 
-🛒 Товари:
-${itemsText}
-
-💰 Сума: ${total} грн
-`;
+💰 Сума: ${total} грн`;
 
     fetch(`https://api.telegram.org/bot${BOT_TOKEN}/sendMessage`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({
-            chat_id: CHAT_ID,
-            text,
-            parse_mode: "Markdown"
-        })
-    })
-    .then(() => {
+        body: JSON.stringify({ chat_id: CHAT_ID, text, parse_mode: "Markdown" })
+    }).then(() => {
         clearCart();
-        document.getElementById("checkout").innerHTML =
-            `<h2>Ваше замовлення №${orderId} оформлено.</h2>
-             <p>Очікуйте дзвінок оператора.</p>`;
+        checkout.innerHTML = `<h2>Замовлення №${orderId} оформлено</h2>`;
     });
 }
 
@@ -287,11 +217,7 @@ document.addEventListener("DOMContentLoaded", () => {
     updateCartCount();
     renderCart();
     loadNPFromJSON();
-    setTimeout(initCityAutocomplete, 500);
 
-   
     const phoneInput = document.getElementById("inp-phone");
-    if (phoneInput) {
-        phoneInput.addEventListener("input", formatPhone);
-    }
+    if (phoneInput) phoneInput.addEventListener("input", formatPhone);
 });
