@@ -114,6 +114,13 @@ function initCityAutocomplete() {
 
     const cities = Object.keys(NP_DATA);
 
+    cities.sort((a, b) => {
+        if (a === "Київ") return -1;
+        if (b === "Київ") return 1;
+        return a.localeCompare(b, "uk");
+    });
+
+
     input.addEventListener("input", () => {
         const value = input.value.toLowerCase();
         list.innerHTML = "";
@@ -121,9 +128,9 @@ function initCityAutocomplete() {
         if (!value) return;
 
         const matches = cities
-            .filter(c => c.toLowerCase().includes(value))
+            .filter(c => c.toLowerCase().startsWith(value))
             .slice(0, 15);
-
+       
         matches.forEach(city => {
             const div = document.createElement("div");
             div.className = "autocomplete-item";
