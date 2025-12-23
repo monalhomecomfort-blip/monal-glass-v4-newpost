@@ -86,7 +86,7 @@ function formatPhone(e) {
 let NP_DATA = {};
 
 function loadNPFromJSON() {
-    fetch("np.json")
+    fetch("/monal-glass-v4-newpost/np.json")    
         .then(res => res.json())
         .then(data => {
             NP_DATA = data;
