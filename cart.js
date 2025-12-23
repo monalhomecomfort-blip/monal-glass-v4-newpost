@@ -157,14 +157,18 @@ function fillWarehouses(city) {
 
     if (!NP_DATA || !NP_DATA[city]) return;
 
-    const filtered = NP_DATA[city].filter(w =>
-        /відділення|поштомат/i.test(w) &&
-        !/вантаж|склад|термінал/i.test(w)
-    );
+    const filtered = NP_DATA[city].filter(w => {
+        const s = w.toLowerCase();
+        return (
+            (s.includes("відділення") || s.includes("поштомат")) &&
+            !s.includes("вантаж") &&
+            !s.includes("склад") &&
+            !s.includes("термінал") &&
+            !s.includes("служб")
+        );
+    });
 
-    if (filtered.length === 0) {
-        return;
-    }
+    if (filtered.length === 0) return;
 
     filtered.forEach(w => {
         const opt = document.createElement("option");
@@ -175,7 +179,6 @@ function fillWarehouses(city) {
 
     select.disabled = false;
 }
-
 
 
 /* ===================== ОФОРМЛЕННЯ ЗАМОВЛЕННЯ ===================== */
