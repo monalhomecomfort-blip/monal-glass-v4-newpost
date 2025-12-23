@@ -83,7 +83,7 @@ function formatPhone(e) {
 
 /* ===================== НОВА ПОШТА (np.json) ===================== */
 
-let NP_DATA = {};
+let NP_DATA = null;
 
 function loadNPFromJSON() {
     fetch("/monal-glass-v4-newpost/np.json")
@@ -94,32 +94,40 @@ function loadNPFromJSON() {
             return res.json();
         })
         .then(data => {
-            if (!data || Object.keys(data).length === 0) {
+            if (!data || typeof data !== "object" || Object.keys(data).length === 0) {
                 console.warn("NP.json порожній або невалідний");
                 return;
             }
 
             NP_DATA = data;
-            initCityAutocomplete();
+
+            // ініціалізуємо autocomplete тільки коли дані готові
+            if (typeof initCityAutocomplete === "function") {
+                initCityAutocomplete();
+            }
         })
         .catch(err => {
-            console.warn("Довідник НП ще завантажується або тимчасово недоступний", err);
+            console.warn(
+                "Не вдалося завантажити довідник Нової Пошти (np.json)",
+                err
+            );
         });
 }
-
 
 function initCityAutocomplete() {
     const input = document.getElementById("np-city-input");
     const list = document.getElementById("np-city-list");
 
+    if (!input || !list || !NP_DATA) return;
+
     const cities = Object.keys(NP_DATA);
 
+    // Київ завжди перший
     cities.sort((a, b) => {
         if (a === "Київ") return -1;
         if (b === "Київ") return 1;
         return a.localeCompare(b, "uk");
     });
-
 
     input.addEventListener("input", () => {
         const value = input.value.toLowerCase().trim();
@@ -147,28 +155,23 @@ function initCityAutocomplete() {
             div.addEventListener("click", () => {
                 input.value = city;
                 list.innerHTML = "";
-                list.style.display = "none"; // 👈 ХОВАЄМО
+                list.style.display = "none";
                 fillWarehouses(city);
+            });
+
+            list.appendChild(div);
         });
 
-        list.appendChild(div);
+        list.style.display = "block";
     });
 
-        list.style.display = "block"; // 👈 ПОКАЗУЄМО ТІЛЬКИ КОЛИ Є ЩО
-    });
-
-
-
-    document.addEventListener("click", e => {
+    document.addEventListener("click", (e) => {
         if (!list.contains(e.target) && e.target !== input) {
             list.innerHTML = "";
             list.style.display = "none";
         }
     });
-
-    
 }
-
 
 function fillCities() {
     const citySelect = document.getElementById("np-city");
@@ -191,48 +194,53 @@ function fillCities() {
 }
 
 function fillWarehouses(city) {
-    const wrhSelect = document.getElementById("np-warehouse");
-    wrhSelect.innerHTML = `<option value="">Оберіть відділення / поштомат</option>`;
+    const select = document.getElementById("np-warehouse");
 
-    if (!city || !NP_DATA[city]) {
-        wrhSelect.disabled = true;
-        return;
-    }
+    select.innerHTML = `<option value="">Оберіть відділення / поштомат</option>`;
+    select.disabled = true;
+
+    if (!city || !NP_DATA[city]) return;
 
     NP_DATA[city].forEach(w => {
         const opt = document.createElement("option");
         opt.value = w;
         opt.textContent = w;
-        wrhSelect.appendChild(opt);
+        select.appendChild(opt);
     });
 
-    wrhSelect.disabled = false;
+    select.disabled = false;
 }
 
 /* ===================== ОФОРМЛЕННЯ ЗАМОВЛЕННЯ ===================== */
 
 function submitOrder() {
     const cart = JSON.parse(localStorage.getItem("cart")) || [];
-    if (cart.length === 0) return alert("Кошик порожній");
+    if (cart.length === 0) {
+        alert("Кошик порожній");
+        return;
+    }
 
     const last  = document.getElementById("inp-last").value.trim();
     const first = document.getElementById("inp-first").value.trim();
     const phone = document.getElementById("inp-phone").value.trim();
-    const city = document.getElementById("np-city-input").value.trim();    
+    const city  = document.getElementById("np-city-input").value.trim();
     const np    = document.getElementById("np-warehouse").value;
     const pay   = document.querySelector("input[name='pay']:checked");
 
     if (!last || !first || !phone || !pay) {
-        return alert("Заповніть всі поля");
+        alert("Заповніть всі поля");
+        return;
     }
 
     if (!city || !np) {
-        return alert("Оберіть місто та відділення");
+        alert("Оберіть місто та відділення");
+        return;
     }
 
     const phonePattern = /^38\(0\d{2}\)\s?\d{3}-\d{2}-\d{2}$/;
     if (!phonePattern.test(phone)) {
-        return alert("Телефон у форматі 38(0XX)XXX-XX-XX");
+        alert("Телефон у форматі 38(0XX)XXX-XX-XX");
+        return;
     }
 
     const orderId = Date.now().toString().slice(-6);
@@ -258,13 +266,14 @@ ${itemsText}
 
     fetch(`https://api.telegram.org/bot${BOT_TOKEN}/sendMessage`, {
         method: "POST",
-        headers: {"Content-Type": "application/json"},
+        headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
             chat_id: CHAT_ID,
             text,
             parse_mode: "Markdown"
         })
-    }).then(() => {
+    })
+    .then(() => {
         clearCart();
         document.getElementById("checkout").innerHTML =
             `<h2>Ваше замовлення №${orderId} оформлено.</h2>
