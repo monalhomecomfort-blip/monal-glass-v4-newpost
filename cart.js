@@ -98,6 +98,45 @@ function loadNPFromJSON() {
         });
 }
 
+function initCityAutocomplete() {
+    const input = document.getElementById("np-city-input");
+    const list = document.getElementById("np-city-list");
+
+    const cities = Object.keys(NP_DATA);
+
+    input.addEventListener("input", () => {
+        const value = input.value.toLowerCase();
+        list.innerHTML = "";
+
+        if (!value) return;
+
+        const matches = cities
+            .filter(c => c.toLowerCase().includes(value))
+            .slice(0, 15);
+
+        matches.forEach(city => {
+            const div = document.createElement("div");
+            div.className = "autocomplete-item";
+            div.textContent = city;
+
+            div.addEventListener("click", () => {
+                input.value = city;
+                list.innerHTML = "";
+                fillWarehouses(city);
+            });
+
+            list.appendChild(div);
+        });
+    });
+
+    document.addEventListener("click", e => {
+        if (!list.contains(e.target) && e.target !== input) {
+            list.innerHTML = "";
+        }
+    });
+}
+
+
 function fillCities() {
     const citySelect = document.getElementById("np-city");
     const wrhSelect = document.getElementById("np-warehouse");
@@ -146,7 +185,7 @@ function submitOrder() {
     const last  = document.getElementById("inp-last").value.trim();
     const first = document.getElementById("inp-first").value.trim();
     const phone = document.getElementById("inp-phone").value.trim();
-    const city  = document.getElementById("np-city").value;
+    const city = document.getElementById("np-city-input").value.trim();    
     const np    = document.getElementById("np-warehouse").value;
     const pay   = document.querySelector("input[name='pay']:checked");
 
@@ -206,7 +245,9 @@ document.addEventListener("DOMContentLoaded", () => {
     updateCartCount();
     renderCart();
     loadNPFromJSON();
+    setTimeout(initCityAutocomplete, 500);
 
+   
     const phoneInput = document.getElementById("inp-phone");
     if (phoneInput) {
         phoneInput.addEventListener("input", formatPhone);
