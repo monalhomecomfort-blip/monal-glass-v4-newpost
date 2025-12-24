@@ -756,3 +756,63 @@ a.sub-mini {
   opacity: 0.6;
   cursor: pointer;
 }
+
+/* ===== PRODUCT META (ratings + review) ===== */
+
+.product-meta {
+    margin: 6px 0 10px 0;
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    max-width: 420px;
+}
+
+/* Один рядок рейтингу */
+.rating-line {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 13px;
+    color: #d6cdbf; /* кремово-бежевий */
+}
+
+/* Лейбл (Аромат / Стійкість) */
+.rating-label {
+    min-width: 70px;
+    opacity: 0.75;
+}
+
+/* Зірочки */
+.stars {
+    letter-spacing: 2px;
+    font-size: 13px;
+    color: #d6cdbf;
+}
+
+/* Числове значення */
+.rating-value {
+    font-size: 12px;
+    opacity: 0.6;
+}
+
+/* Кнопка Відгук */
+.review-btn {
+    margin-top: 4px;
+    align-self: flex-start;
+
+    background: transparent;
+    border: 1px solid rgba(214, 205, 191, 0.35);
+    color: #d6cdbf;
+
+    font-size: 12px;
+    padding: 4px 12px;
+    border-radius: 20px;
+    cursor: pointer;
+
+    transition: all 0.25s ease;
+}
+
+.review-btn:hover {
+    background: rgba(214, 205, 191, 0.12);
+    border-color: rgba(214, 205, 191, 0.6);
+}
