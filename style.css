@@ -758,42 +758,49 @@ a.sub-mini {
 }
 
 /* ===== PRODUCT META (ratings + review) ===== */
+/* ===== PRODUCT HEADER LINES ===== */
 
-.product-meta {
-    margin: 6px 0 10px 0;
+/* Назва + рейтинг аромату */
+.title-line {
     display: flex;
-    flex-direction: column;
-    gap: 4px;
-    max-width: 420px;
+    justify-content: space-between;
+    align-items: center;
 }
 
-/* Один рядок рейтингу */
+/* Українська назва + рейтинг стійкості */
+.subtitle-line {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 2px;
+}
+
+/* Ціна + кнопка Відгук */
+.price-line {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin: 8px 0 6px;
+}
+
+/* Рейтинг */
 .rating-line {
     display: flex;
     align-items: center;
-    gap: 8px;
-    font-size: 13px;
-    color: #d6cdbf; /* кремово-бежевий */
-}
-
-/* Лейбл (Аромат / Стійкість) */
-.rating-label {
-    min-width: 70px;
-    opacity: 0.75;
-}
-
-/* Зірочки */
-.stars {
-    letter-spacing: 2px;
+    gap: 6px;
     font-size: 13px;
     color: #d6cdbf;
 }
 
-/* Числове значення */
+.stars {
+    letter-spacing: 2px;
+}
+
 .rating-value {
     font-size: 12px;
     opacity: 0.6;
 }
+
 
 /* Кнопка Відгук */
 .review-btn {
