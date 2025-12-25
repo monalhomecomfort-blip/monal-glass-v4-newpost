@@ -757,30 +757,21 @@ a.sub-mini {
   cursor: pointer;
 }
 
-/* ===== PRODUCT META (ratings + review) ===== */
-/* ===== PRODUCT HEADER LINES ===== */
+/* ===== PRODUCT HEADER (title + ratings) ===== */
 
-/* Назва + рейтинг аромату */
-.title-line {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
+.product-header {
+    display: grid;
+    grid-template-columns: 1fr auto;
+    column-gap: 24px;
+    align-items: start;
+    margin-bottom: 6px;
 }
 
-/* Українська назва + рейтинг стійкості */
-.subtitle-line {
+.product-meta {
     display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin-top: 2px;
-}
-
-/* Ціна + кнопка Відгук */
-.price-line {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin: 8px 0 6px;
+    flex-direction: column;
+    gap: 4px;
+    text-align: right;
 }
 
 /* Рейтинг */
@@ -801,103 +792,19 @@ a.sub-mini {
     opacity: 0.6;
 }
 
-
 /* Кнопка Відгук */
 .review-btn {
     margin-top: 4px;
-    align-self: flex-start;
-
     background: transparent;
     border: 1px solid rgba(214, 205, 191, 0.35);
     color: #d6cdbf;
-
     font-size: 12px;
     padding: 4px 12px;
     border-radius: 20px;
     cursor: pointer;
-
     transition: all 0.25s ease;
 }
 
 .review-btn:hover {
     background: rgba(214, 205, 191, 0.12);
-    border-color: rgba(214, 205, 191, 0.6);
-}
-
-/* ===== PRODUCT HEADER WITH META ===== */
-
-.product-header {
-    position: relative;
-    padding-right: 140px; /* місце під рейтинг */
-}
-
-.product-meta {
-    position: absolute;
-    top: 0;
-    right: 0;
-
-    display: flex;
-    flex-direction: column;
-    gap: 6px;
-
-    text-align: right;
-}
-
-
-.rating-line {
-    display: flex;
-    align-items: center;
-    gap: 6px;
-    font-size: 13px;
-    color: #d6cdbf;
-}
-
-.stars {
-    letter-spacing: 2px;
-}
-
-.rating-value {
-    font-size: 12px;
-    opacity: 0.6;
-}
-
-.review-btn {
-    margin-top: 4px;
-    background: transparent;
-    border: 1px solid rgba(214, 205, 191, 0.35);
-    color: #d6cdbf;
-    font-size: 12px;
-    padding: 4px 12px;
-    border-radius: 20px;
-    cursor: pointer;
-}
-
-.review-btn:hover {
-    background: rgba(214, 205, 191, 0.12);
-}
-
-/* ===== PRODUCT TEXT LAYOUT ===== */
-
-.product-text {
-    position: relative;
-    max-width: 520px;
-    padding-right: 160px; /* місце для ratings справа */
-}
-
-/* ===== PRODUCT HEADER (title + ratings) ===== */
-
-.product-header {
-    display: grid;
-    grid-template-columns: 1fr auto;
-    column-gap: 24px;
-    align-items: start;
-    margin-bottom: 6px;
-}
-
-/* щоб meta не розтягував текст */
-.product-meta {
-    display: flex;
-    flex-direction: column;
-    gap: 4px;
-    text-align: right;
 }
