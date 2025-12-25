@@ -823,3 +823,53 @@ a.sub-mini {
     background: rgba(214, 205, 191, 0.12);
     border-color: rgba(214, 205, 191, 0.6);
 }
+
+/* ===== PRODUCT HEADER WITH META ===== */
+
+.product-header {
+    position: relative;
+    padding-right: 140px; /* місце під рейтинг */
+}
+
+.product-meta {
+    position: absolute;
+    top: 0;
+    right: 0;
+
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    align-items: flex-end;
+}
+
+.rating-line {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 13px;
+    color: #d6cdbf;
+}
+
+.stars {
+    letter-spacing: 2px;
+}
+
+.rating-value {
+    font-size: 12px;
+    opacity: 0.6;
+}
+
+.review-btn {
+    margin-top: 4px;
+    background: transparent;
+    border: 1px solid rgba(214, 205, 191, 0.35);
+    color: #d6cdbf;
+    font-size: 12px;
+    padding: 4px 12px;
+    border-radius: 20px;
+    cursor: pointer;
+}
+
+.review-btn:hover {
+    background: rgba(214, 205, 191, 0.12);
+}
