@@ -883,3 +883,21 @@ a.sub-mini {
     max-width: 520px;
     padding-right: 160px; /* місце для ratings справа */
 }
+
+/* ===== PRODUCT HEADER (title + ratings) ===== */
+
+.product-header {
+    display: grid;
+    grid-template-columns: 1fr auto;
+    column-gap: 24px;
+    align-items: start;
+    margin-bottom: 6px;
+}
+
+/* щоб meta не розтягував текст */
+.product-meta {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    text-align: right;
+}
