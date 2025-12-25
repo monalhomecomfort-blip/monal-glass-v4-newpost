@@ -838,9 +838,11 @@ a.sub-mini {
 
     display: flex;
     flex-direction: column;
-    gap: 4px;
-    align-items: flex-end;
+    gap: 6px;
+
+    text-align: right;
 }
+
 
 .rating-line {
     display: flex;
@@ -872,4 +874,12 @@ a.sub-mini {
 
 .review-btn:hover {
     background: rgba(214, 205, 191, 0.12);
+}
+
+/* ===== PRODUCT TEXT LAYOUT ===== */
+
+.product-text {
+    position: relative;
+    max-width: 520px;
+    padding-right: 160px; /* місце для ratings справа */
 }
