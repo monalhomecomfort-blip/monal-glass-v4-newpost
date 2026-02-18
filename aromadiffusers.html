@@ -3,7 +3,11 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Аромадифузори — Mōnal</title>
+            <!-- FAVICON -->
+    <link rel="icon" type="image/png" sizes="32x32" href="favicon32_only_o.png">
+    
+    <title>Аромадифузори для дому | Mōnal</title>
+    <meta name="description" content="Аромадифузори для дому Mōnal наповнюють простір м’яким стійким ароматом. Стильні рішення для щоденного затишку та подарунків.">
     <link rel="stylesheet" href="style.css">
 </head>
   
@@ -12,28 +16,111 @@
 <!-- NAV -->
 <nav>
     <div class="nav-left">
-        <img src="images/logo.svg" alt="Mōnal" class="nav-logo">
+          <a href="index.html" class="nav-logo-link">
+            <img src="images/logo.svg" alt="Mōnal" class="nav-logo">
+        </a>
+
+        <!-- Соцмережі -->
+        <div class="nav-social">
+            <a href="https://www.tiktok.com/@monalofficial?is_from_webapp=1&sender_device=pc" target="_blank">
+                <img src="images/social/tiktok.png" alt="TikTok">
+            </a>
+            <a href="https://www.instagram.com/monal.official/" target="_blank">
+                <img src="images/social/instagram.png" alt="Instagram">
+            </a>
+            <a href="https://www.facebook.com/people/Monal/61552030280894/" target="_blank">
+                <img src="images/social/facebook.png" alt="Facebook">
+            </a>
+            <a href="https://t.me/Monalgroup/1" target="_blank">
+                <img src="images/social/tg.png" alt="Telegram">
+            </a>
+        </div>
     </div>
 
-    <div class="nav-center">
-        <a href="index.html">Головна</a>        
-        <a href="about.html">Про бренд</a>
-        <a href="contacts.html">Контакти</a>
+<div class="nav-center">
+
+    <!-- КАТАЛОГ -->
+    <div class="nav-catalog">
+        <button class="catalog-btn" type="button">
+            Каталог
+            <span class="catalog-arrow">▾</span>
+        </button>
+
+        <div class="catalog-dropdown">
+            <a href="aromadiffusers.html">Аромадифузори</a>
+            <a href="refills.html">Рефіли</a>
+            <a href="parfums.html">Парфуми для дому</a>
+            <a href="discovery.html">Discovery set</a>
+            <a href="candles.html">Свічки</a>
+
+            <div class="dropdown-divider"></div>
+
+            <a href="certificates.html">Подарункові сертифікати</a>
+            <a href="gift-sets.html">Подарункові набори</a>
+
+            <div class="dropdown-divider"></div>
+
+            <a href="car-sachets.html">Аромасаше для авто</a>
+            <a href="wardrobe-sachets.html">Аромасаше для гардеробу</a>
+
+            <div class="dropdown-divider"></div>
+
+            <a href="hand-soap.html">Мило для рук</a>
+            <a href="hand-cream.html">Крем для рук</a>
+            <a href="shower-gel.html">Гель для душу</a>
+        </div>
     </div>
+
+    <a href="about.html">Про бренд</a>
+    <a href="contacts.html">Контакти</a>
+
+</div>
+
 
     <div class="nav-right">
         <a href="delivery.html">Доставка</a>
         <a href="cart.html">Кошик <span id="cart-count"></span></a>
     </div>
+    <a href="cart.html" class="mobile-cart">
+        <img src="images/social/cart.png" alt="Кошик">
+        <span class="mobile-cart-count"></span>
+    </a> 
+    <!-- BURGER BUTTON -->
+<button class="burger-btn" aria-label="Відкрити меню">
+  ☰
+</button>
 </nav>
+<!-- TOP CATEGORIES — HOME ONLY -->
+<div class="nav-top-categories">
+  <a href="parfums.html">Парфуми для дому</a>
+  <a href="refills.html">Рефіл</a>
+  <a href="discovery.html">Discovery set</a>
+  <a href="gift-sets.html">Подарункові набори</a>
+  <a href="certificates.html">Сертифікати</a>
+</div>    
+<!-- MOBILE MENU -->
+<div class="mobile-menu">
+  <button class="mobile-close">✕</button>
+
+  <a href="index.html">Головна</a>
+  <a href="about.html">Про бренд</a>
+  <a href="delivery.html">Доставка</a>
+  <a href="contacts.html">Контакти</a>
+  <a href="cart.html">Кошик <span class="burger-cart-count"></span></a>
+</div>
 
 <!-- CONTENT -->
 <div class="container">
+    <a href="index.html" class="back-btn">← Назад</a>
+    <h1 class="page-title">Аромадифузори для дому</h1>
+    <p class="page-intro">
+        Аромадифузори Mōnal наповнюють простір м’яким, стійким ароматом, який відчувається, але не перевантажує.<br> 
+        Вони створені для дому, де важлива тиша, баланс і настрій.
+    </p>
 
-    <h1 class="page-title">Аромадифузори</h1>
 
     <!-- PRODUCT 1 -->
-     <div class="product-row">
+    <div class="product-row">
 
         
         <!-- MEDIA -->        
@@ -45,7 +132,7 @@
 
             <img
                 src="images/products/diffuser.png"
-                alt="SHADOW OF FIG"
+                alt="Аромадифузор для дому Mōnal SHADOW OF FIG - Тінь смоковниці"
                 class="product-diffuser">
 
         </div>
@@ -54,23 +141,37 @@
         <!-- TEXT -->
         <div class="product-text">
 
+    <!-- HEAD -->
+    <div class="product-head">
+
+        <!-- LEFT -->
+        <div class="product-head-left">
             <h2 class="product-title">SHADOW OF FIG</h2>
             <div class="product-subtitle">Тінь смоковниці · 200 ml</div>
 
             <div class="product-price">1590 грн</div>
 
-            <button class="buy-btn" onclick="addToCart('SHADOW OF FIG', 1590, 'Аромадифузор')">Купити</button>    
-    
+            <button class="buy-btn" onclick="addToCart('SHADOW OF FIG', 1590, 'Аромадифузор')">
+                Купити
+            </button>
+        </div>
+
+        <!-- RIGHT: RATING -->
+        <div class="product-rating" aria-label="Властивості аромату">
+            
+            <div class="rating-row">
+                <span class="rating-label">Стійкість</span>
+                <span class="rating-dots">● ● ● ● ○</span>
+            </div>
+
+            <div class="rating-row">
+                <span class="rating-label">Інтенсивність</span>
+                <span class="rating-dots">● ● ● ○ ○</span>
+            </div>
+        </div>
+
     </div>
-
-</div>
-
-
-    <!-- ДАЛІ ТЕКСТ ЯК БУВ -->
-</div>
-
-
-        <!-- ДАЛІ ТЕКСТ БЕЗ ЗМІН -->         
+    <!-- /HEAD -->
                         
             <p><strong>Склад (піраміда аромату):</strong><br>
             Верхні ноти: озон, фрезія<br>
@@ -114,7 +215,7 @@
         <!-- ДИФУЗОР -->
         <img
             src="images/products/diffuser.png"
-            alt="NOCTURNE — Полотно ночі"
+            alt="Аромадифузор для дому Mōnal NOCTURNE — Полотно ночі"
             class="product-diffuser"
         >
 
@@ -122,14 +223,28 @@
 
     <!-- TEXT -->
     <div class="product-text">
+<div class="product-head">
 
+    <div class="product-head-left">
         <h2 class="product-title">NOCTURNE</h2>
         <div class="product-subtitle">Полотно ночі · 200 ml</div>
-
         <div class="product-price">1590 грн</div>
-
         <button class="buy-btn" onclick="addToCart('NOCTURNE', 1590, 'Аромадифузор')">Купити</button>
-        
+    </div>
+
+    <div class="product-rating" aria-label="Властивості аромату">
+        <div class="rating-row">
+            <span class="rating-label">Стійкість</span>
+            <span class="rating-dots">● ● ● ● ●</span>
+        </div>
+        <div class="rating-row">
+            <span class="rating-label">Інтенсивність</span>
+            <span class="rating-dots">● ● ● ● ○</span>
+        </div>
+    </div>
+
+</div>
+          
         <p><strong>Склад (піраміда аромату):</strong><br>
             • Верхні ноти: мандарин, шавлія<br>
             • Серце: яблуко<br>
@@ -184,19 +299,34 @@
 
         <!-- ДИФУЗОР -->
         <img src="images/products/diffuser.png"
-             alt="CROWN OF OLIVE — Крона оливи"
+             alt="Аромадифузор для дому Mōnal CROWN OF OLIVE — Крона оливи"
              class="product-diffuser">
     </div>
 
     <!-- TEXT -->
     <div class="product-text">
 
-        <div class="product-title">CROWN OF OLIVE</div>
+<div class="product-head">
+
+    <div class="product-head-left">
+        <h2 class="product-title">CROWN OF OLIVE</h2>
         <div class="product-subtitle">Крона оливи · 200 ml</div>
-
         <div class="product-price">1590 грн</div>
-
         <button class="buy-btn" onclick="addToCart('CROWN OF OLIVE', 1590, 'Аромадифузор')">Купити</button>
+    </div>
+
+    <div class="product-rating" aria-label="Властивості аромату">
+        <div class="rating-row">
+            <span class="rating-label">Стійкість</span>
+            <span class="rating-dots">● ● ● ○ ○</span>
+        </div>
+        <div class="rating-row">
+            <span class="rating-label">Інтенсивність</span>
+            <span class="rating-dots">● ● ● ● ○</span>
+        </div>
+    </div>
+
+</div>
 
         <p><strong>Склад (піраміда аромату):</strong><br>
         • Верхні ноти: персик, лимон, лаванда, фіалка<br>
@@ -247,19 +377,34 @@
 
         <img
             src="images/products/diffuser.png"
-            alt="GREEN HAVEN"
+            alt="Аромадифузор для дому Mōnal GREEN HAVEN - Трав'яне плесо"
             class="product-diffuser">
     </div>
 
     <!-- TEXT -->
     <div class="product-text">
 
+<div class="product-head">
+
+    <div class="product-head-left">
         <h2 class="product-title">GREEN HAVEN</h2>
         <div class="product-subtitle">Трав'яне плесо · 200 ml</div>
-
         <div class="product-price">1590 грн</div>
-
         <button class="buy-btn" onclick="addToCart('GREEN HAVEN', 1590, 'Аромадифузор')">Купити</button>
+    </div>
+
+    <div class="product-rating" aria-label="Властивості аромату">
+        <div class="rating-row">
+            <span class="rating-label">Стійкість</span>
+            <span class="rating-dots">● ● ● ○ ○</span>
+        </div>
+        <div class="rating-row">
+            <span class="rating-label">Інтенсивність</span>
+            <span class="rating-dots">● ● ○ ○ ○</span>
+        </div>
+    </div>
+
+</div>
 
         <p><strong>Склад (піраміда аромату):</strong><br>
         Верхні ноти: мандарин, бергамот<br>
@@ -267,7 +412,7 @@
         База: білий чай, лимон</p>
 
         <p><strong>Відчуття аромату:</strong><br>
-        Вас зустрічає яскравий цитрусовий сплеск: лимон і бергамот додають аромату свіжості й легкого поколювання.
+        Зустрічає яскравий цитрусовий сплеск: лимон і бергамот додають аромату свіжості й легкого поколювання.
         Імбир стоїть поруч, дає теплу пряність, яка врівноважує кислотність цитрусів.</p>
 
         <p>
@@ -285,7 +430,389 @@
     </div>
 </div>
     
-<!-- PRODUCT 5 — STONE & SALT -->
+<!-- PRODUCT 5 — VESPER -->
+<div class="product-row">
+
+    <!-- MEDIA -->
+    <div class="product-media micro-animate">
+
+        <div class="product-bg"
+             style="background-image: url('images/products/VESPER_фон.jpg');">
+        </div>
+
+        <img
+            src="images/products/diffuser.png"
+            alt="Аромадифузор для дому Mōnal VESPER - Вечірня зоря"
+            class="product-diffuser">
+    </div>
+
+    <!-- TEXT -->
+    <div class="product-text">
+
+<div class="product-head">
+
+    <div class="product-head-left">
+        <h2 class="product-title">VESPER</h2>
+        <div class="product-subtitle">Вечірня зоря · 200 ml</div>
+        <div class="product-price">1590 грн</div>
+        <button class="buy-btn" onclick="addToCart('VESPER', 1590, 'Аромадифузор')">Купити</button>
+    </div>
+
+    <div class="product-rating" aria-label="Властивості аромату">
+        <div class="rating-row">
+            <span class="rating-label">Стійкість</span>
+            <span class="rating-dots">● ● ● ● ●</span>
+        </div>
+        <div class="rating-row">
+            <span class="rating-label">Інтенсивність</span>
+            <span class="rating-dots">● ● ● ○ ○</span>
+        </div>
+    </div>
+
+</div>
+
+        <p><strong>Склад (піраміда аромату):</strong><br>
+        • Верхні ноти: лаванда, бергамот<br>
+        • Серце: перець, кедр, тютюн<br>
+        • База: ветивер, пачулі, сандал, мускус, деревні ноти
+        </p>
+
+        <p><strong>Відчуття аромату:</strong><br>
+        Аромат починається чисто й врівноважено: лаванда та бергамот задають світлий, акуратний старт без різкої цитрусовості. 
+        Це не яскрава свіжість, а скоріше відчуття порядку й ясності.
+        </p>
+
+        <p>
+        З часом композиція заглиблюється — з’являються перець, кедр і тютюн, формуючи тепле, сухе серце з чітким характером. 
+        Звучання стає більш зібраним, спокійним, структурним.
+        </p>
+
+        <p>
+        У фіналі аромат тримається на ветивері, пачулі, сандалі та мускусі. База оксамитова, глибока, без важкості, з рівним деревним шлейфом, 
+        який довго залишається в просторі.
+        </p>
+
+        <p><strong>Характер і настрій:</strong><br>
+        Спокійний, стриманий, унісекс-аромат із характером внутрішньої зібраності.
+        </p>
+
+        <p>
+        Він не домінує, а створює атмосферу тиші, фокусу й балансу.
+        </p>
+
+        <p>
+        Підійде для вітальні, кабінету, спальні, зони релаксу, лаунж-зони або бібліотеки.
+        </p>
+
+    </div>
+</div>
+
+
+<!-- PRODUCT 6 — ROSALYA -->
+<div class="product-row">
+
+    <!-- MEDIA -->
+    <div class="product-media micro-animate">
+
+        <div class="product-bg"
+             style="background-image: url('images/products/ROSALIYA_фон.jpg');">
+        </div>
+
+        <img
+            src="images/products/diffuser.png"
+            alt="Аромадифузор для дому Mōnal ROSALYA - Розалія"
+            class="product-diffuser">
+    </div>
+
+    <!-- TEXT -->
+    <div class="product-text">
+
+<div class="product-head">
+
+    <div class="product-head-left">
+        <h2 class="product-title">ROSALYA</h2>
+        <div class="product-subtitle">Розалія · 200 ml</div>
+        <div class="product-price">1590 грн</div>
+        <button class="buy-btn" onclick="addToCart('ROSALYA', 1590, 'Аромадифузор')">Купити</button>
+    </div>
+
+    <div class="product-rating" aria-label="Властивості аромату">
+        <div class="rating-row">
+            <span class="rating-label">Стійкість</span>
+            <span class="rating-dots">● ● ● ● ○</span>
+        </div>
+        <div class="rating-row">
+            <span class="rating-label">Інтенсивність</span>
+            <span class="rating-dots">● ● ● ○ ○</span>
+        </div>
+    </div>
+
+</div>
+
+        <p><strong>Склад (піраміда аромату):</strong><br>
+        • Верхні ноти: рожевий перець, бергамот<br>
+        • Серце: троянда, жасмин<br>
+        • База: ваніль, амбра
+        </p>
+
+        <p><strong>Відчуття аромату:</strong><br>
+        Початок аромату — квітковий, іскристий і світлий: рожевий перець додає живості, а бергамот — легкої свіжості. 
+        Вони не різкі, а делікатно відкривають композицію.
+        </p>
+
+        <p>
+        Далі глибше розкривається квіткове серце з троянди та жасмину — тепле, округле, м’яке за відчуттями. 
+        Троянда звучить ніжно й жіночно, без сухості чи надмірної солодкості.
+        </p>
+
+        <p>
+        У фіналі з’являється ванільно-амброва база, яка огортає аромат м’яким теплом, додаючи відчуття комфорту й спокою.
+        </p>
+
+        <p><strong>Характер і настрій:</strong><br>
+        Ніжний, чуттєвий, жіночний аромат, що створює атмосферу затишку й гармонії.
+        </p>
+
+        <p>
+        Звучить делікатно й інтимно, залишаючи в просторі легку квіткову присутність.
+        </p>
+
+        <p>
+        Підійде для спальні, вітальні, зони релаксу, гардеробної або б’юті-простору.
+        </p>
+
+    </div>
+</div>
+
+<!-- PRODUCT 7 — DRIFT -->
+<div class="product-row">
+
+    <!-- MEDIA -->
+    <div class="product-media micro-animate">
+
+        <div class="product-bg"
+             style="background-image: url('images/products/DRIFT_фон.jpg');">
+        </div>
+
+        <img
+            src="images/products/diffuser.png"
+            alt="Аромадифузор для дому Mōnal DRIFT - Дрифтинг"
+            class="product-diffuser">
+    </div>
+
+    <!-- TEXT -->
+    <div class="product-text">
+
+<div class="product-head">
+
+    <div class="product-head-left">
+        <h2 class="product-title">DRIFT</h2>
+        <div class="product-subtitle">Дрифтинг · 200 ml</div>
+        <div class="product-price">1590 грн</div>
+        <button class="buy-btn" onclick="addToCart('DRIFT', 1590, 'Аромадифузор')">Купити</button>
+    </div>
+
+    <div class="product-rating" aria-label="Властивості аромату">
+        <div class="rating-row">
+            <span class="rating-label">Стійкість</span>
+            <span class="rating-dots">● ● ● ● ●</span>
+        </div>
+        <div class="rating-row">
+            <span class="rating-label">Інтенсивність</span>
+            <span class="rating-dots">● ● ● ● ○</span>
+        </div>
+    </div>
+
+</div>
+
+        <p><strong>Склад (піраміда аромату):</strong><br>
+        • Верхні ноти: морські ноти, бергамот<br>
+        • Серце: розмарин, шавлія, герань<br>
+        • База: ладан, пачулі
+        </p>
+
+        <p><strong>Відчуття аромату:</strong><br>
+        З перших секунд аромат будується навколо ладану, який одразу задає глибину й смолисту щільність звучання. 
+        Він присутній протягом усього розкриття, формуючи основу композиції.
+        </p>
+
+        <p>
+        Морські ноти та бергамот працюють фоново, додаючи легкого прохолодного відтінку, що пом’якшує густину, але не робить аромат занадто свіжим.
+        </p>
+
+        <p>
+        Трав’яне серце — розмарин, шавлія та герань — не виходить на передній план, а підсилює ладан сухою, зібраною структурою.
+        </p>
+
+        <p>
+        Фінал насичений, стабільний, тримається на ладані та пачулі, звучить глибоко й об’ємно.
+        </p>
+
+        <p><strong>Характер і настрій:</strong><br>
+        Густий, інтенсивний аромат із смолисто-містичним характером.
+        </p>
+
+        <p>
+        Створює атмосферу тиші, зосередженості й внутрішньої глибини.
+        </p>
+
+        <p>
+        Підійде для вітальні, робочого простору, ванної або SPA-зони.
+        </p>
+
+    </div>
+</div>
+
+
+<!-- PRODUCT 8 — FREEDOM -->
+<div class="product-row">
+
+    <!-- MEDIA -->
+    <div class="product-media micro-animate">
+
+        <div class="product-bg"
+             style="background-image: url('images/products/FREEDOM_фон.jpg');">
+        </div>
+
+        <img
+            src="images/products/diffuser.png"
+            alt="Аромадифузор для дому Mōnal FREEDOM - Свобода"
+            class="product-diffuser">
+    </div>
+
+    <!-- TEXT -->
+    <div class="product-text">
+
+<div class="product-head">
+
+    <div class="product-head-left">
+        <h2 class="product-title">FREEDOM</h2>
+        <div class="product-subtitle">Свобода · 200 ml</div>
+        <div class="product-price">1590 грн</div>
+        <button class="buy-btn" onclick="addToCart('FREEDOM', 1590, 'Аромадифузор')">Купити</button>
+    </div>
+
+    <div class="product-rating" aria-label="Властивості аромату">
+        <div class="rating-row">
+            <span class="rating-label">Стійкість</span>
+            <span class="rating-dots">● ● ● ● ○</span>
+        </div>
+        <div class="rating-row">
+            <span class="rating-label">Інтенсивність</span>
+            <span class="rating-dots">● ● ● ○ ○</span>
+        </div>
+    </div>
+
+</div>
+
+        <p><strong>Склад (піраміда аромату):</strong><br>
+        • Верхні ноти: фісташки, бергамот, кардамон<br>
+        • Серце: рожевий перець, тубероза<br>
+        • База: іланг-іланг, жасмин, боби тонка
+        </p>
+
+        <p><strong>Відчуття аромату:</strong><br>
+        Аромат відкривається кремово й м’яко: фісташки створюють теплу, ніжну текстуру, яку освіжає бергамот, а кардамон додає тонкої пряності.
+        </p>
+
+        <p>
+        У серці звучить тубероза з рожевим перцем, додаючи об’єму й глибини, але без різкості чи нав’язливості.
+        </p>
+
+        <p>
+        Фінальне звучання — це оксамит іланг-ілангу, жасмину та бобів тонка, які залишають теплий, згладжений шлейф і відчуття внутрішньої рівноваги.
+        </p>
+
+        <p><strong>Характер і настрій:</strong><br>
+        Спокійний, теплий, огортаючий аромат.
+        </p>
+
+        <p>
+        Він не привертає увагу, а створює м’яку, гармонійну атмосферу, в якій легко розслабитись.
+        </p>
+
+        <p>
+        Підійде для спальні, вітальні, кабінету, лаунж- або релакс-зони.
+        </p>
+
+    </div>
+</div>
+    
+<!-- PRODUCT 9 — GOLDEN RUM -->
+<div class="product-row">
+
+    <!-- MEDIA -->
+    <div class="product-media micro-animate">
+
+        <div class="product-bg"
+             style="background-image: url('images/products/GOLDEN RUM_фон.jpg');">
+        </div>
+
+        <img
+            src="images/products/diffuser.png"
+            alt="Аромадифузор для дому Mōnal GOLDEN RUM - Золотий ром"
+            class="product-diffuser">
+    </div>
+
+    <!-- TEXT -->
+    <div class="product-text">
+
+<div class="product-head">
+
+    <div class="product-head-left">
+        <h2 class="product-title">GOLDEN RUM</h2>
+        <div class="product-subtitle">Золотий ром · 200 ml</div>
+        <div class="product-price">1590 грн</div>
+        <button class="buy-btn" onclick="addToCart('GOLDEN RUM', 1590, 'Аромадифузор')">Купити</button>
+    </div>
+
+    <div class="product-rating" aria-label="Властивості аромату">
+        <div class="rating-row">
+            <span class="rating-label">Стійкість</span>
+            <span class="rating-dots">● ● ● ● ●</span>
+        </div>
+        <div class="rating-row">
+            <span class="rating-label">Інтенсивність</span>
+            <span class="rating-dots">● ● ● ● ○</span>
+        </div>
+    </div>
+
+</div>
+
+        <p><strong>Склад (піраміда аромату):</strong><br>
+        • Верхні ноти: ром, кориця<br>
+        • Серце: мускатний горіх, ваніль<br>
+        • База: кедр, сандал
+        </p>
+
+        <p><strong>Відчуття аромату:</strong><br>
+        Початок — теплий, пряно-ромовий, насичений, але не різкий. Ром звучить глибоко й ароматно, а кориця додає затишної пряності.
+        </p>
+
+        <p>
+        У серці композиції з’являються мускатний горіх і ваніль — м’які, округлі, кремові, що роблять аромат комфортним і плавним.
+        </p>
+
+        <p>
+        Фінал тримається на кедрі та сандалі, формуючи теплу деревну основу з рівним, спокійним шлейфом.
+        </p>
+
+        <p><strong>Характер і настрій:</strong><br>
+        Затишний, теплий аромат вечірнього настрою.
+        </p>
+
+        <p>
+        Створює відчуття спокою, комфорту й неспішного розслаблення.
+        </p>
+
+        <p>
+        Підійде для вітальні, спальні, кухні, кабінету, лаунж-зони або зони відпочинку.
+        </p>
+
+    </div>
+</div>
+
+<!-- PRODUCT 10 — STONE & SALT -->
 <div class="product-row">
 
     <!-- MEDIA -->
@@ -297,19 +824,34 @@
 
         <img
             src="images/products/diffuser.png"
-            alt="STONE & SALT"
+            alt="Аромадифузор для дому Mōnal STONE & SALT - Камінь і сіль"
             class="product-diffuser">
     </div>
 
     <!-- TEXT -->
     <div class="product-text">
 
+<div class="product-head">
+
+    <div class="product-head-left">
         <h2 class="product-title">STONE & SALT</h2>
         <div class="product-subtitle">Камінь і сіль · 200 ml</div>
-
         <div class="product-price">1590 грн</div>
-
         <button class="buy-btn" onclick="addToCart('STONE & SALT', 1590, 'Аромадифузор')">Купити</button>
+    </div>
+
+    <div class="product-rating" aria-label="Властивості аромату">
+        <div class="rating-row">
+            <span class="rating-label">Стійкість</span>
+            <span class="rating-dots">● ● ● ● ○</span>
+        </div>
+        <div class="rating-row">
+            <span class="rating-label">Інтенсивність</span>
+            <span class="rating-dots">● ● ● ○ ○</span>
+        </div>
+    </div>
+
+</div>
 
         <p><strong>Склад (піраміда аромату):</strong><br>
         Верхні ноти: цитруси<br>
@@ -339,18 +881,123 @@
     </div>
 </div>
 
-    
-    <!-- ТУТ БУДУТЬ ЩЕ 5 product-row -->
-
 </div>
+    
+<section class="faq-section">
+    <h2 class="faq-title">Поширені запитання</h2>
+
+    <details>
+        <summary>Скільки тримається аромат у дифузорі?</summary>
+        <p>
+            У середньому аромат у дифузорі відчувається від 8 до 24 тижнів,
+            залежно від температури, вентиляції приміщення та кількості паличок.
+            Чим менше паличок — тим м’якше й довше звучання.
+        </p>
+    </details>
+
+    <details>
+        <summary>Чи можна регулювати інтенсивність аромату?</summary>
+        <p>
+            Так. Інтенсивність регулюється кількістю паличок.
+            Для невеликих приміщень достатньо 2–3 паличок,
+            для більших просторів можна використовувати всі.
+        </p>
+    </details>
+
+    <details>
+        <summary>Чи підходять аромадифузори для спальні?</summary>
+        <p>
+            Так, аромадифузори Mōnal створені для м’якого, ненав’язливого звучання.
+            Для спальні рекомендуємо обирати спокійні композиції
+            та використовувати мінімальну кількість паличок.
+        </p>
+    </details>
+
+    <details>
+        <summary>Чи безпечні аромадифузори для дому?</summary>
+        <p>
+            Наші аромадифузори призначені для використання в житлових просторах
+            і не містять агресивних компонентів.
+            Рекомендуємо дотримуватись стандартних правил використання
+            та розміщувати дифузор поза досяжністю дітей і тварин.
+        </p>
+    </details>
+
+    <details>
+        <summary>Чи підійдуть аромадифузори на подарунок?</summary>
+        <p>
+            Так, аромадифузори — універсальний подарунок для дому.
+            Вони не потребують електрики, прості у використанні
+            та створюють атмосферу затишку й балансу.
+        </p>
+    </details>
+</section>
 
 <footer>
+    <div class="footer-policy">
+        <a href="privacy.html">Політика конфіденційності</a>
+    </div>
+
     <div class="footer-logo">
         <img src="images/logo.svg" alt="Mōnal">
     </div>
-    © 2025 Ароматика для дому
+    <span class="footer-copy">© 2023 Аромати для дому та подарунки</span>
+
+    <div class="footer-payments">
+        <img src="images/social/mastercard.svg" alt="Mastercard">
+        <img src="images/social/visa.svg" alt="Visa">
+        <img src="images/social/applepay.svg" alt="Apple Pay">
+        <img src="images/social/googlepay.svg" alt="Google Pay">
+    </div>
 </footer>
 
-<script src="cart.js"></script>      
+<script src="cart.js"></script>
+<script>
+  const burgerBtn = document.querySelector('.burger-btn');
+  const mobileMenu = document.querySelector('.mobile-menu');
+  const closeBtn = document.querySelector('.mobile-close');
+  const burgerCartCount = document.querySelector('.burger-cart-count');
+  function updateBurgerCartCount() {
+    if (!burgerCartCount) return;
+    const cart = JSON.parse(localStorage.getItem("cart")) || [];
+    burgerCartCount.textContent = cart.length ? `(${cart.length})` : "";
+  }
+  if (burgerBtn && mobileMenu && closeBtn) {
+    burgerBtn.addEventListener('click', () => {
+      updateBurgerCartCount();          // ← оновлюємо при відкритті
+      mobileMenu.style.display = 'flex';
+    });
+    closeBtn.addEventListener('click', () => {
+      mobileMenu.style.display = 'none';
+    });
+    mobileMenu.querySelectorAll('a').forEach(link => {
+      link.addEventListener('click', () => {
+        mobileMenu.style.display = 'none';
+      });
+    });
+  }
+  // первинне оновлення при завантаженні сторінки
+  updateBurgerCartCount();
+</script>    
+
+<script>
+  if (window.innerWidth > 900) {
+    const navCatalog = document.querySelector('.nav-catalog');
+    const catalogBtn = document.querySelector('.catalog-btn');
+
+    if (navCatalog && catalogBtn) {
+      catalogBtn.addEventListener('click', function (e) {
+        e.preventDefault();
+        e.stopPropagation();
+        navCatalog.classList.toggle('open');
+      });
+
+      document.addEventListener('click', function () {
+        navCatalog.classList.remove('open');
+      });
+    }
+  }
+</script>
+    
 </body>
 </html>
